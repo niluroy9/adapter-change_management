@@ -114,9 +114,15 @@ healthcheck(callback) {
       * healthcheck(), execute it passing the error seen as an argument
       * for the callback's errorMessage parameter.
       */
-      this.emit('OFFLINE', { id: this.id });
+    this.emitOffline();
+      log.info('Service now adapter is offline {this.id}');
+      
+      callbackError = error;
+
+
+      /*this.emit('OFFLINE', { id: this.id });
       log.error(error + ', this.id: ' + this.id);
-      callback(error);
+      callback(error);*/
    } else {
      /**
       * Write this block.
@@ -128,9 +134,15 @@ healthcheck(callback) {
       * parameter as an argument for the callback function's
       * responseData parameter.
       */
+      this.emitOnline();
+      
+      callbackData = result;
+      log.info('Service now adapter is online');
+
+      /*
       this.emit('ONLINE', { id: this.id });
       log.info('ServiceNow: Instance is available.');
-      callback(result);
+      callback(result);*/
    }
  });
 }
