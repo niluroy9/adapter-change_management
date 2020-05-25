@@ -152,10 +152,12 @@ class ServiceNowAdapter extends EventEmitter {
      * Note how the object was instantiated in the constructor().
      * get() takes a callback function.
      */
+     ServiceNowConnector.get(callback);
+     /*
      let getCallOptions = { ...this.props };
     getCallOptions.method = 'GET';
     getCallOptions.query = 'sysparm_limit=1';
-    this.ServiceNowConnector.sendRequest(getCallOptions, (results, error) => callback(results, error));
+    this.ServiceNowConnector.sendRequest(getCallOptions, (results, error) => callback(results, error));*/
   }
 
   /**
@@ -174,9 +176,11 @@ class ServiceNowAdapter extends EventEmitter {
      * Note how the object was instantiated in the constructor().
      * post() takes a callback function.
      */
+     ServiceNowConnector.post(callback);
+     /*
      let getCallOptions = { ...this.props };
   getCallOptions.method = 'POST';
-  this.ServiceNowConnector.sendRequest(getCallOptions, (results, error) => callback(results, error));
+  this.ServiceNowConnector.sendRequest(getCallOptions, (results, error) => callback(results, error));*/
   }
 }
 
