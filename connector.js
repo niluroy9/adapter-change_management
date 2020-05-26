@@ -195,12 +195,12 @@ sendRequest(callOptions, callback) {
  *   Will be HTML text if hibernating instance.
  * @param {error} callback.error - The error property of callback.
  */
-get(callback) {
+/*get(callback) {
     let getCallOptions = { ...this.options };
     getCallOptions.method = 'GET';
     getCallOptions.query = 'sysparm_limit=1';
     this.sendRequest(getCallOptions, (results, error) => callback(results, error));
-  }
+}*/
 
 post(callOptions, callback) {
     let getCallOptions = { ...this.options };
