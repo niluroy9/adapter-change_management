@@ -115,9 +115,9 @@ healthcheck(callback) {
       * for the callback's errorMessage parameter.
       */
       this.emitOffline();
-      log.info('Service now adapter is offline {this.id}');
+      log.info('Service now adapter is offline ' + this.id);
       
-      callbackError = error;
+      callback(error);
    } else {
      /**
       * Write this block.
@@ -130,9 +130,8 @@ healthcheck(callback) {
       * responseData parameter.
       */
       this.emitOnline();
-      
-      callbackData = result;
       log.info('Service now adapter is online');
+      callback(result);
    }
  });
 }
