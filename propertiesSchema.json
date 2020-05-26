@@ -5,9 +5,9 @@
   "properties": {
     "url": {
       "type": "string",
-      "default": "https://yourDevServiceNowInstanceCanonicalHostname/",
+      "default": "https://dev57074.service-now.com",
       "examples": [
-        "https://yourDevServiceNowInstanceCanonicalHostname/"
+        "https://dev57074.service-now.com"
       ]
     },
     "auth": {
@@ -15,16 +15,16 @@
       "properties": {
         "username": {
           "type": "string",
-          "default": "devUsername",
+          "default": "admin",
           "examples": [
-            "devUsername"
+            "admin"
           ]
         },
         "password": {
           "type": "string",
-          "default": "devUserPassword",
+          "default": "$ENC8de3840a6a5ca01cd38a4b11d6d322178387278ea6d8449f5808",
           "examples": [
-            "devUserPassword"
+            "$ENC8de3840a6a5ca01cd38a4b11d6d322178387278ea6d8449f5808"
           ]
         }
       },

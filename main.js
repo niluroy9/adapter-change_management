@@ -94,6 +94,8 @@ class ServiceNowAdapter extends EventEmitter {
  *   that handles the response.
  */
 healthcheck(callback) {
+    let callbackData = null;
+    let callbackError = null;
  this.getRecord((result, error) => {
    /**
     * For this lab, complete the if else conditional
@@ -117,7 +119,7 @@ healthcheck(callback) {
       this.emitOffline();
       log.info('Service now adapter is offline ' + this.id);
       
-      callback(error);
+     callbackError = error;
    } else {
      /**
       * Write this block.
@@ -131,8 +133,9 @@ healthcheck(callback) {
       */
       this.emitOnline();
       log.info('Service now adapter is online');
-      callback(result);
+     callbackData = result;
    }
+   callback(callbackData,callbackError);
  });
 }
 
