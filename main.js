@@ -72,7 +72,7 @@ class ServiceNowAdapter extends EventEmitter {
    * @memberof ServiceNowAdapter
    * @method connect
    * @summary Connect to ServiceNow
-   * @description Complete a single healthcheck and emit ONLINE or OFFLINE.
+   * @description Complete a single healthchgeck and emit ONLINE or OFFLINE.
    *   IAP calls this method after instantiating an object from the class.
    *   There is no need for parameters because all connection details
    *   were passed to the object's constructor and assigned to object property this.props.
@@ -94,8 +94,8 @@ class ServiceNowAdapter extends EventEmitter {
  *   that handles the response.
  */
 healthcheck(callback) {
-    let callbackData = null;
-    let callbackError = null;
+    //let callbackData = null;
+    //let callbackError = null;
  this.getRecord((result, error) => {
    /**
     * For this lab, complete the if else conditional
@@ -116,10 +116,15 @@ healthcheck(callback) {
       * healthcheck(), execute it passing the error seen as an argument
       * for the callback's errorMessage parameter.
       */
-      this.emitOffline();
+
+      /*this.emitOffline();
       log.info('Service now adapter is offline ' + this.id);
       
-     callbackError = error;
+     callbackError = error;*/
+
+     this.emitOffline();
+      log.error(`Service now adapter is offline Error occured : ${this.id}`)
+      callback(null,error);
    } else {
      /**
       * Write this block.
@@ -131,11 +136,16 @@ healthcheck(callback) {
       * parameter as an argument for the callback function's
       * responseData parameter.
       */
+
+      /*
       this.emitOnline();
       log.info('Service now adapter is online');
-     callbackData = result;
+     callbackData = result;*/
+     this.emitOnline();
+      log.debug(`Calling get Records service online: ${this.id}`);
+     callback(result,null);
    }
-   callback(callbackData,callbackError);
+   //callback(callbackData,callbackError);
  });
 }
 
@@ -192,7 +202,14 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * get() takes a callback function.
      */
-     ServiceNowConnector.get(callback);
+
+     this.connector.get((data, error) => {
+        if (error) {
+            console.error(`\nError returned from GET request:\n${JSON.stringify(error)}`);
+        }
+        console.log(`\nResponse returned from GET request:\n${JSON.stringify(data)}`)
+    });
+     //ServiceNowConnector.get(callback);
      /*
      let getCallOptions = { ...this.props };
     getCallOptions.method = 'GET';
@@ -216,7 +233,13 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * post() takes a callback function.
      */
-     ServiceNowConnector.post(callback);
+     this.connector.post((data, error) => {
+        if (error) {
+            console.error(`\nError returned from POST request:\n${JSON.stringify(error)}`);
+        }
+        console.log(`\nResponse returned from POST request:\n${JSON.stringify(data)}`)
+    });
+     //ServiceNowConnector.post(callback);
      /*
      let getCallOptions = { ...this.props };
   getCallOptions.method = 'POST';
