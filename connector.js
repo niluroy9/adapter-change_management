@@ -41,28 +41,6 @@ class ServiceNowConnector {
      * @param {error} [errorMessage] - If an error is caught, return error
      *   message in optional second argument to callback function.
      */
-
-         /**
-     * @memberof ServiceNowConnector
-     * @method get
-     * @summary Calls ServiceNow GET API
-     * @description Call the ServiceNow GET API. Sets the API call's method and query,
-     *   then calls this.sendRequest(). In a production environment, this method
-     *   should have a parameter for passing limit, sort, and filter options.
-     *   We are ignoring that for this course and hardcoding a limit of one.
-     *
-     * @param {iapCallback} callback - Callback a function.
-     * @param {(object|string)} callback.data - The API's response. Will be an object if sunnyday path.
-     *   Will be HTML text if hibernating instance.
-     * @param {error} callback.error - The error property of callback.
-     */
-    get(callback) {
-        let getCallOptions = this.options;
-        getCallOptions.method = 'GET';
-        getCallOptions.query = 'sysparm_limit=1';
-        this.sendRequest(getCallOptions, (results, error) => callback(results, error));
-    }
-    
     /**
  *@memberof ServiceNowConnector
  * @method processRequestResults
@@ -170,7 +148,26 @@ class ServiceNowConnector {
             && response.body.includes('<html>')
             && response.statusCode === 200;
     }
-
+    /**
+     * @memberof ServiceNowConnector
+     * @method get
+     * @summary Calls ServiceNow GET API
+     * @description Call the ServiceNow GET API. Sets the API call's method and query,
+     *   then calls this.sendRequest(). In a production environment, this method
+     *   should have a parameter for passing limit, sort, and filter options.
+     *   We are ignoring that for this course and hardcoding a limit of one.
+     *
+     * @param {iapCallback} callback - Callback a function.
+     * @param {(object|string)} callback.data - The API's response. Will be an object if sunnyday path.
+     *   Will be HTML text if hibernating instance.
+     * @param {error} callback.error - The error property of callback.
+     */
+    get(callback) {
+        let getCallOptions = this.options;
+        getCallOptions.method = 'GET';
+        getCallOptions.query = 'sysparm_limit=1';
+        this.sendRequest(getCallOptions, (results, error) => callback(results, error));
+    }
     /**
      * @memberof ServiceNowConnector
      * @method post
