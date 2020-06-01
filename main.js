@@ -238,14 +238,23 @@ class ServiceNowAdapter extends EventEmitter {
 	      */
 	      let callbackData = null;
 	      let callbackError = null;
-	      this.connector.post(this.connector.options, (data, error) => {
+	      this.connector.post((data, error) => {
 	      if (error) {
 	      console.error(`\nError returned from POST request:\n${JSON.stringify(error)}`);
 	      callbackError = error;
 	      } else {  
 	    var body = JSON.parse(data.body); 
 	       let result = body.result; 
-	       var arr = [];
+           var arrobj= {};
+           arrobj["change_ticket_number"]=result.number;
+           arrobj["active"] = result.active;
+           arrobj["priority"] = result.priority;
+           arrobj["description"]=result.description;
+            arrobj["work_start"] = result.work_start;
+            arrobj["work_end"] = result.work_end;
+            arrobj["change_ticket_key"]= result.sys_id;
+            callbackData = arrobj;
+	       /*var arr = [];
 	      arr.push ({"change_ticket_number" : result.number}); 
 	       arr.push ({"active" : result.active}); 
 	       arr.push ({"priority" : result.priority}); 
@@ -253,7 +262,7 @@ class ServiceNowAdapter extends EventEmitter {
 	       arr.push ({"work_start" : result.work_start}); 
 	       arr.push ({"work_end" : result.work_end}); 
 	       arr.push ({"change_ticket_key" : result.sys_id}); 
-	       callbackData = Object.assign({}, arr);
+	       callbackData = Object.assign({}, arr);*/
 	      console.log(`\nResponse returned from POST request:\n${JSON.stringify(callbackData)}`);
 	      } 
 	       return callback(callbackData,callbackError);

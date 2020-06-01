@@ -185,6 +185,7 @@ class ServiceNowConnector {
     post(callback) {
         let postCallOptions = this.options;
         postCallOptions.method = 'POST';
+        console.log('*************'+ JSON.stringify(postCallOptions));
         this.sendRequest(postCallOptions, (results, error) => callback(results, error));
     }
 
