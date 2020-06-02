@@ -206,13 +206,15 @@ class ServiceNowAdapter extends EventEmitter {
 	       let resultArry = bodyObj.result;
 	      let arr = [];
 	      for (let resultObj in resultArry) { 
-	       arr.push ({"change_ticket_number" : resultArry[resultObj].number}); 
-	       arr.push ({"active" : resultArry[resultObj].active}); 
-	       arr.push ({"priority" : resultArry[resultObj].priority}); 
-	       arr.push ({"description" : resultArry[resultObj].description}); 
-	       arr.push ({"work_start" : resultArry[resultObj].work_start}); 
-	       arr.push ({"work_end" : resultArry[resultObj].work_end}); 
-	       arr.push ({"change_ticket_key" : resultArry[resultObj].sys_id}); 
+              let obj = {};
+              obj["change_ticket_number"] = resultArry[resultObj].number;
+              obj["active"] = resultArry[resultObj].active;
+              obj["priority"] = resultArry[resultObj].priority;
+              obj["description"] = resultArry[resultObj].description;
+              obj["work_start"] = resultArry[resultObj].work_start;
+              obj["work_end"] = resultArry[resultObj].work_end;
+              obj["change_ticket_key"] = resultArry[resultObj].sys_id;
+              arr.push(obj);
 	       callbackData = arr;
 	      console.log(`\nResponse returned from GET request:\n${JSON.stringify(callbackData)}`);
 	      }
@@ -254,15 +256,6 @@ class ServiceNowAdapter extends EventEmitter {
             arrobj["work_end"] = result.work_end;
             arrobj["change_ticket_key"]= result.sys_id;
             callbackData = arrobj;
-	       /*var arr = [];
-	      arr.push ({"change_ticket_number" : result.number}); 
-	       arr.push ({"active" : result.active}); 
-	       arr.push ({"priority" : result.priority}); 
-	       arr.push ({"description" : result.description}); 
-	       arr.push ({"work_start" : result.work_start}); 
-	       arr.push ({"work_end" : result.work_end}); 
-	       arr.push ({"change_ticket_key" : result.sys_id}); 
-	       callbackData = Object.assign({}, arr);*/
 	      console.log(`\nResponse returned from POST request:\n${JSON.stringify(callbackData)}`);
 	      } 
 	       return callback(callbackData,callbackError);
